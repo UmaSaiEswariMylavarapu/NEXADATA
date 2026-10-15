@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#080b18">
+<meta name="description" content="Explore Data Science, machine learning, visualization, real-world applications and interactive quizzes.">
+<title>Data Science Explorer | Learn • Explore • Build</title>
+
+<style>
+:root {
+  --bg:#080b18;
+  --panel:#11172b;
+  --panel2:#151d36;
+  --text:#f2f5ff;
+  --muted:#b2bdd8;
+  --cyan:#55f4ee;
+  --purple:#b18cff;
+  --pink:#ff80c8;
+  --line:rgba(255,255,255,.11);
+}
+
+* { box-sizing:border-box; scroll-behavior:smooth; }
+
+body {
+  margin:0;
+  font-family:Arial,Helvetica,sans-serif;
+  background:
+    radial-gradient(ellipse at 10% 0%,rgba(111,65,255,.17),transparent 38%),
+    radial-gradient(ellipse at 90% 25%,rgba(25,210,224,.10),transparent 35%),
+    var(--bg);
+  color:var(--text);
+  line-height:1.7;
+}
+
+a { color:var(--cyan); text-decoration:none; }
+a:hover { color:var(--pink); }
+
+header {
+  padding:16px 6%;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:15px;
+  flex-wrap:wrap;
+  background:rgba(8,11,24,.92);
+  border-bottom:1px solid var(--line);
+}
+
+.logo {
+  font-size:19px;
+  font-weight:800;
+  letter-spacing:1px;
+}
+
+.logo span { color:var(--cyan); }
+
+nav { display:flex; flex-wrap:wrap; gap:13px; }
+nav a { font-size:13px; color:var(--muted); }
+nav a:hover { color:var(--cyan); }
+
+.hero {
+  padding:85px 7% 65px;
+  text-align:center;
+}
+
+.badge {
+  display:inline-block;
+  border:1px solid rgba(85,244,238,.4);
+  background:rgba(85,244,238,.08);
+  color:var(--cyan);
+  padding:7px 15px;
+  border-radius:30px;
+  font-size:12px;
+  letter-spacing:1px;
+}
+
+h1 {
+  font-size:clamp(36px,7vw,66px);
+  line-height:1.12;
+  margin:23px 0;
+}
+
+.gradient {
+  background:linear-gradient(90deg,var(--cyan),var(--purple),var(--pink));
+  -webkit-background-clip:text;
+  background-clip:text;
+  color:transparent;
+}
+
+.hero p {
+  max-width:720px;
+  margin:0 auto;
+  color:var(--muted);
+  font-size:17px;
+}
+
+.btn {
+  display:inline-block;
+  padding:12px 20px;
+  border-radius:9px;
+  margin:20px 7px 0;
+  font-weight:bold;
+  background:linear-gradient(110deg,var(--cyan),#9b9aff);
+  color:#080b18;
+}
+
+.btn.secondary {
+  background:transparent;
+  color:var(--cyan);
+  border:1px solid var(--cyan);
+}
+
+.stats {
+  max-width:900px;
+  margin:35px auto 0;
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:12px;
+}
+
+.stat {
+  background:rgba(255,255,255,.035);
+  border:1px solid var(--line);
+  padding:17px 8px;
+  border-radius:13px;
+}
+
+.stat strong { display:block; color:var(--cyan); font-size:23px; }
+.stat span { color:var(--muted); font-size:12px; }
+
+section {
+  padding:60px 7%;
+  scroll-margin-top:20px;
+}
+
+.section-title {
+  font-size:clamp(27px,4vw,38px);
+  text-align:center;
+  margin:0 0 12px;
+}
+
+.intro {
+  max-width:740px;
+  text-align:center;
+  color:var(--muted);
+  margin:0 auto 35px;
+}
+
+.grid {
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(min(100%,245px),1fr));
+  gap:18px;
+}
+
+.card {
+  background:linear-gradient(145deg,rgba(21,29,54,.96),rgba(13,18,35,.96));
+  border:1px solid var(--line);
+  border-radius:17px;
+  padding:23px;
+  transition:transform .25s,border-color .25s;
+  overflow-wrap:anywhere;
+}
+
+.card:hover {
+  transform:translateY(-4px);
+  border-color:rgba(85,244,238,.55);
+}
+
+.card h3 { margin:8px 0; font-size:19px; }
+.card p { color:var(--muted); font-size:14px; }
+.icon { font-size:34px; }
+
+.tag {
+  display:inline-block;
+  font-size:11px;
+  border-radius:20px;
+  padding:4px 10px;
+  margin:4px 3px 4px 0;
+  color:var(--cyan);
+  background:rgba(85,244,238,.08);
+  border:1px solid rgba(85,244,238,.18);
+}
+
+.example {
+  background:rgba(177,140,255,.09);
+  border-left:3px solid var(--purple);
+  padding:12px;
+  border-radius:4px 9px 9px 4px;
+  font-size:13px;
+  margin-top:12px;
+  color:#e3ddff;
+}
+
+.diagram {
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:10px;
+  padding:25px 8px;
+}
+
+.step {
+  flex:1 1 110px;
+  max-width:170px;
+  text-align:center;
+  padding:16px 9px;
+  border:1px solid rgba(85,244,238,.35);
+  background:linear-gradient(145deg,#17233d,#17152f);
+  border-radius:13px;
+}
+
+.step b { display:block; color:var(--cyan); }
+.arrow { color:var(--purple); font-size:23px; }
+
+.note {
+  border:1px solid var(--line);
+  border-radius:13px;
+  background:rgba(255,255,255,.035);
+  padding:18px;
+  margin:18px 0;
+  color:var(--muted);
+}
+
+.table-wrap { overflow-x:auto; }
+
+table {
+  border-collapse:collapse;
+  width:100%;
+  min-width:500px;
+  background:var(--panel);
+  border-radius:12px;
+  overflow:hidden;
+}
+
+th,td {
+  padding:13px;
+  border:1px solid var(--line);
+  text-align:left;
+  font-size:13px;
+}
+
+th { color:var(--cyan); background:#172039; }
+td { color:var(--muted); }
+
+.codebox {
+  background:#050914;
+  color:var(--cyan);
+  border:1px solid var(--line);
+  border-radius:12px;
+  padding:18px;
+  overflow-x:auto;
+  font-family:monospace;
+  font-size:13px;
+  white-space:pre;
+}
+
+.quiz-box {
+  max-width:800px;
+  margin:auto;
+  padding:25px;
+  background:var(--panel);
+  border:1px solid var(--line);
+  border-radius:18px;
+}
+
+.question {
+  padding:17px 0;
+  border-bottom:1px solid var(--line);
+}
+
+.question h3 { font-size:16px; }
+
+.question label {
+  display:block;
+  padding:10px;
+  margin:7px 0;
+  border:1px solid var(--line);
+  border-radius:8px;
+  cursor:pointer;
+  font-size:14px;
+}
+
+.question label:hover { border-color:var(--cyan); }
+.question input { margin-right:8px; }
+
+.feedback {
+  display:none;
+  padding:12px;
+  margin-top:10px;
+  background:rgba(85,244,238,.07);
+  border-left:3px solid var(--cyan);
+  border-radius:5px;
+  font-size:13px;
+}
+
+#quiz-result {
+  font-size:18px;
+  font-weight:bold;
+  color:var(--cyan);
+  margin-top:20px;
+}
+
+footer {
+  text-align:center;
+  padding:35px 6%;
+  border-top:1px solid var(--line);
+  color:var(--muted);
+  font-size:13px;
+}
+
+@media(max-width:600px) {
+  header { padding:15px 5%; }
+  nav { gap:10px; }
+  nav a { font-size:12px; }
+  .hero { padding:65px 5% 45px; }
+  section { padding:45px 5%; }
+  .stats { grid-template-columns:repeat(3,minmax(0,1fr)); }
+  .stat strong { font-size:19px; }
+  .card { padding:19px; }
+  .arrow { transform:rotate(90deg); }
+  .quiz-box { padding:16px; }
+}
+
+@media(prefers-reduced-motion:reduce) {
+  *,*::before,*::after {
+    scroll-behavior:auto !important;
+    transition:none !important;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <a class="logo" href="#home">DATA<span>SCIENCE</span> EXPLORER</a>
+  <nav>
+    <a href="#home">Home</a>
+    <a href="#basics">Basics</a>
+    <a href="#lifecycle">Lifecycle</a>
+    <a href="#tools">Tools</a>
+    <a href="#ml">ML</a>
+    <a href="#applications">Applications</a>
+    <a href="#quiz">Quiz</a>
+  </nav>
+</header>
+
+<main>
+
+<section class="hero" id="home">
+  <span class="badge">YOUR INTERACTIVE LEARNING SPACE</span>
+
+  <h1>Explore the World of<br>
+    <span class="gradient">Data Science</span>
+  </h1>
+
+  <p>
+    Transform raw data into meaningful insights.
+    Learn fundamental concepts, explore intelligent algorithms,
+    understand real-world applications and test your knowledge
+    in one learning platform.
+  </p>
+
+  <a class="btn" href="#basics">Start Exploring ↗</a>
+  <a class="btn secondary" href="#quiz">Take the Quiz</a>
+
+  <div class="stats">
+    <div class="stat"><strong>01</strong><span>Learn the Basics</span></div>
+    <div class="stat"><strong>02</strong><span>Explore Applications</span></div>
+    <div class="stat"><strong>03</strong><span>Test Your Knowledge</span></div>
+  </div>
+</section>
+
+<section id="basics">
+  <h2 class="section-title">What Is <span class="gradient">Data Science?</span></h2>
+  <p class="intro">
+    Data Science combines statistics, programming, domain knowledge
+    and analytical thinking to extract useful information from data.
+  </p>
+
+  <div class="grid">
+    <article class="card">
+      <div class="icon">📦</div>
+      <h3>Data</h3>
+      <p>Raw facts and observations collected from different sources.
+      Data can be numbers, text, images, audio or measurements.</p>
+      <div class="example"><b>Example:</b> Student attendance,
+      examination marks and study hours.</div>
+    </article>
+
+    <article class="card">
+      <div class="icon">🔍</div>
+      <h3>Analysis</h3>
+      <p>Examining data to identify trends, compare values,
+      investigate questions and understand relationships.</p>
+      <div class="example"><b>Example:</b> Finding which subject
+      has the highest average marks.</div>
+    </article>
+
+    <article class="card">
+      <div class="icon">💡</div>
+      <h3>Insights</h3>
+      <p>Useful findings that help people make informed decisions
+      rather than relying only on guesses.</p>
+      <div class="example"><b>Example:</b> Discovering that
+      students with low attendance may need additional support.</div>
+    </article>
+  </div>
+
+  <div class="note">
+    <b>Remember:</b> Data Science does not automatically prove
+    that one thing causes another. A relationship between two
+    variables may have other explanations.
+  </div>
+</section>
+
+<section id="lifecycle">
+  <h2 class="section-title">The Data Science <span class="gradient">Lifecycle</span></h2>
+  <p class="intro">A visual journey from a question to a useful solution.</p>
+
+  <div class="diagram">
+    <div class="step"><span>🎯</span><b>1. Define</b><small>Ask a question</small></div>
+    <span class="arrow">→</span>
+    <div class="step"><span>📥</span><b>2. Collect</b><small>Gather data</small></div>
+    <span class="arrow">→</span>
+    <div class="step"><span>🧹</span><b>3. Clean</b><small>Fix data issues</small></div>
+    <span class="arrow">→</span>
+    <div class="step"><span>📊</span><b>4. Analyze</b><small>Explore patterns</small></div>
+    <span class="arrow">→</span>
+    <div class="step"><span>🤖</span><b>5. Model</b><small>Build if needed</small></div>
+    <span class="arrow">→</span>
+    <div class="step"><span>📈</span><b>6. Evaluate</b><small>Check results</small></div>
+    <span class="arrow">→</span>
+    <div class="step"><span>🚀</span><b>7. Communicate</b><small>Share findings</small></div>
+  </div>
+
+  <div class="grid">
+    <article class="card">
+      <h3>1. Define the Problem</h3>
+      <p>Identify the question, objective and how success will be measured.</p>
+      <div class="example">Example: Can we identify students who may need extra academic support?</div>
+    </article>
+    <article class="card">
+      <h3>2. Collect Data</h3>
+      <p>Gather relevant data from authorized surveys, databases,
+      files, sensors or other appropriate sources.</p>
+      <div class="example">Example: Collect study hours, attendance and past marks with appropriate permission.</div>
+    </article>
+    <article class="card">
+      <h3>3. Clean Data</h3>
+      <p>Handle missing values, duplicates, inconsistent formats
+      and incorrect records.</p>
+      <div class="example">Example: Investigate missing attendance records before analysis.</div>
+    </article>
+    <article class="card">
+      <h3>4. Explore and Analyze</h3>
+      <p>Calculate statistics and use charts to identify patterns,
+      unusual values and possible relationships.</p>
+      <div class="example">Example: Compare attendance levels with examination scores.</div>
+    </article>
+    <article class="card">
+      <h3>5. Build a Model</h3>
+      <p>When prediction or grouping is needed, select an
+      appropriate algorithm and train it on suitable data.</p>
+      <div class="example">Example: Train a model using historical student records.</div>
+    </article>
+    <article class="card">
+      <h3>6. Evaluate and Communicate</h3>
+      <p>Check whether results are reliable, explain limitations
+      and communicate findings clearly.</p>
+      <div class="example">Example: Report prediction errors and explain how the results should be used.</div>
+    </article>
+  </div>
+</section>
+
+<section id="tools">
+  <h2 class="section-title">Tools of the <span class="gradient">Trade</span></h2>
+  <p class="intro">Learn the tools that help data professionals
+  collect, analyze, visualize and model information.</p>
+
+  <div class="grid">
+    <article class="card">
+      <div class="icon">🐍</div>
+      <h3>Python</h3>
+      <p>A programming language widely used for data analysis,
+      automation and machine learning.</p>
+      <span class="tag">Pandas</span><span class="tag">NumPy</span>
+      <span class="tag">Scikit-learn</span>
+      <p><a href="https://www.python.org/about/gettingstarted/" target="_blank" rel="noopener">Learn Python ↗</a></p>
+    </article>
+
+    <article class="card">
+      <div class="icon">🗃️</div>
+      <h3>SQL</h3>
+      <p>Used to query, filter, combine and summarize data
+      stored in relational databases.</p>
+      <span class="tag">SELECT</span><span class="tag">JOIN</span>
+      <span class="tag">GROUP BY</span>
+      <p><a href="https://www.w3schools.com/sql/" target="_blank" rel="noopener">Learn SQL ↗</a></p>
+    </article>
+
+    <article class="card">
+      <div class="icon">📗</div>
+      <h3>Excel</h3>
+      <p>Useful for organizing data, formulas, pivot tables,
+      basic analysis and charts.</p>
+      <span class="tag">Formulas</span><span class="tag">Pivot Tables</span>
+      <p><a href="https://support.microsoft.com/excel" target="_blank" rel="noopener">Learn Excel ↗</a></p>
+    </article>
+
+    <article class="card">
+      <div class="icon">📊</div>
+      <h3>Power BI</h3>
+      <p>Helps create interactive reports and business
+      intelligence dashboards.</p>
+      <span class="tag">Reports</span><span class="tag">Dashboards</span>
+      <p><a href="https://learn.microsoft.com/power-bi/" target="_blank" rel="noopener">Learn Power BI ↗</a></p>
+    </article>
+
+    <article class="card">
+      <div class="icon">📈</div>
+      <h3>Tableau</h3>
+      <p>A data visualization platform for creating charts,
+      dashboards and visual stories.</p>
+      <span class="tag">Visualization</span><span class="tag">Analytics</span>
+      <p><a href="https://www.tableau.com/learn/training" target="_blank" rel="noopener">Explore Tableau ↗</a></p>
+    </article>
+
+    <article class="card">
+      <div class="icon">📉</div>
+      <h3>Matplotlib</h3>
+      <p>A Python library for building line charts, bar charts,
+      histograms and many other visualizations.</p>
+      <span class="tag">Charts</span><span class="tag">Python</span>
+      <p><a href="https://matplotlib.org/stable/tutorials/" target="_blank" rel="noopener">Learn Matplotlib ↗</a></p>
+    </article>
+  </div>
+</section>
+
+<section id="ml">
+  <h2 class="section-title">Machine Learning <span class="gradient">Algorithms</span></h2>
+  <p class="intro">
+    Machine Learning allows computer systems to learn patterns
+    from data. The algorithm should match the task and data available.
+  </p>
+
+  <div class="grid">
+    <article class="card">
+      <div class="icon">📏</div>
+      <h3>Linear Regression</h3>
+      <p>A supervised learning algorithm used to estimate
+      a numerical value from input features.</p>
+      <div class="example"><b>Example:</b> Estimating a house price
+      from features such as size and location.</div>
+    </article>
+
+    <article class="card">
+      <div class="icon">🌳</div>
+      <h3>Decision Tree</h3>
+      <p>Uses a sequence of feature-based decisions to make
+      predictions. It can be used for classification and regression.</p>
+      <div class="example"><b>Example:</b> Classifying a loan application
+      using relevant financial information.</div>
+    </article>
+
+    <article class="card">
+      <div class="icon">👥</div>
+      <h3>K-Means Clustering</h3>
+      <p>An unsupervised algorithm that divides observations
+      into a chosen number of clusters.</p>
+      <div class="example"><b>Example:</b> Grouping customers
+      by purchasing patterns.</div>
+    </article>
+
+    <article class="card">
+      <div class="icon">✉️</div>
+      <h3>Classification</h3>
+      <p>Predicts a category or class using examples with
+      known labels during supervised training.</p>
+      <div class="example"><b>Example:</b> Classifying an email
+      as spam or not spam.</div>
+    </article>
+
+    <article class="card">
+      <div class="icon">🧠</div>
+      <h3>Neural Networks</h3>
+      <p>Models made of interconnected computational units.
+      Deep neural networks can learn complex patterns.</p>
+      <div class="example"><b>Example:</b> Recognizing objects
+      in images.</div>
+    </article>
+
+    <article class="card">
+      <div class="icon">🎯</div>
+      <h3>Model Evaluation</h3>
+      <p>Measures how well a model performs on appropriate
+      data that was not used to train it.</p>
+      <div class="example"><b>Example:</b> Using suitable test data
+      to check prediction performance.</div>
+    </article>
+  </div>
+
+  <div class="note">
+    <b>Important distinction:</b> Regression usually predicts
+    numerical values. Classification predicts categories.
+    Clustering discovers groups without requiring predefined labels.
+    Always evaluate models before using their predictions in practice.
+  </div>
+</section>
+
+<section id="visualization">
+  <h2 class="section-title">Understanding <span class="gradient">Data Visually</span></h2>
+  <p class="intro">
+    Different charts answer different questions. Select a chart
+    based on the information you want to communicate.
+  </p>
+
+  <div class="grid">
+    <article class="card">
+      <div class="icon">📊</div>
+      <h3>Bar Chart</h3>
+      <p>Compares values between categories.</p>
+      <div class="example">
+        Mathematics ▰▰▰▰▰▰▰<br>
+        Python&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;▰▰▰▰▰<br>
+        SQL&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;▰▰▰▰
+        <br><small>Illustrative values only.</small>
+      </div>
+    </article>
+
+    <article class="card">
+      <div class="icon">📈</div>
+      <h3>Line Chart</h3>
+      <p>Shows how a value changes over time or across an ordered sequence.</p>
+      <div class="example">Example: Monthly sales, daily temperatures or attendance trends.</div>
+    </article>
+
+    <article class="card">
+      <div class="icon">🍰</div>
+      <h3>Pie Chart</h3>
+      <p>Shows proportions of a whole when categories are few
+      and the parts are meaningful.</p>
+      <div class="example">Example: The percentage of a budget allocated to different categories.</div>
+    </article>
+
+    <article class="card">
+      <div class="icon">🔬</div>
+      <h3>Scatter Plot</h3>
+      <p>Displays the relationship between two numerical variables.</p>
+      <div class="example">Example: Exploring the relationship between study hours and examination marks.</div>
+    </article>
+  </div>
+</section>
+
+<section id="applications">
+  <h2 class="section-title">Real-World <span class="gradient">Applications</span></h2>
+  <p class="intro">
+    Data Science supports decisions in many industries.
+    These examples show possible uses, not guaranteed outcomes.
+  </p>
+
+  <div class="grid">
+    <article class="card">
+      <div class="icon">🏥</div>
+      <h3>Healthcare</h3>
+      <p>Analyze health records, support medical research,
+      monitor hospital operations and help identify patterns.</p>
+      <div class="example">Example: Studying hospital admission trends to help plan staffing.
+      Clinical decisions still require qualified professionals.</div>
+    </article>
+
+    <article class="card">
+      <div class="icon">🏦</div>
+      <h3>Banking and Finance</h3>
+      <p>Analyze transactions, assess financial risks and
+      detect unusual patterns that may need investigation.</p>
+      <div class="example">Example: Flagging an unusual transaction for further review.</div>
+    </article>
+
+    <article class="card">
+      <div class="icon">🛍️</div>
+      <h3>E-Commerce</h3>
+      <p>Study product demand, customer preferences,
+      inventory and recommendation patterns.</p>
+      <div class="example">Example: Recomm
